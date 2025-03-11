@@ -44,10 +44,13 @@ class WoocommerceClient {
     String? contentType,
   ) async {
     if (baseURL.contains('https://')) {
-      await HttpBasicAuth(
-        username: this.consumerKey,
-        password: this.consumerSecret,
-      ).applyToParams(queryParams, headerParams);
+      // await HttpBasicAuth(
+      //   username: this.consumerKey,
+      //   password: this.consumerSecret,
+      // ).applyToParams(queryParams, headerParams);
+      // Add credentials directly to query parameters instead of using HttpBasicAuth
+    queryParams.add(QueryParam('consumer_key', consumerKey));
+    queryParams.add(QueryParam('consumer_secret', consumerSecret));
     }
 
     headerParams.addAll(_defaultHeaderMap);
